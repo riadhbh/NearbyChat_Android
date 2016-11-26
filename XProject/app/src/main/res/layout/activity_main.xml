@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+    <include layout="@layout/content_main22" />
+
+    <TextView
+        android:text="Location Service is Disabled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/GpsAlert"
+        android:clickable="true"
+        android:layout_gravity="bottom|center"
+        android:textColor="@android:color/holo_red_light"
+        android:visibility="gone"
+        android:layout_marginBottom="90dp" />
+
+</android.support.design.widget.CoordinatorLayout>

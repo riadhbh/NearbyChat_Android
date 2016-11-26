@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/loginopt"
+            android:title="Login" />
+        <!--android:icon="@drawable/ic_menu_camera"-->
+
+        <item
+            android:id="@+id/registeropt"
+            android:title="Register" />
+        <!--android:icon="@drawable/ic_menu_gallery"-->
+<!--
+
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Slideshow" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Tools" />
+-->
+    </group>
+
+    <item android:title="Help">
+        <menu>
+            <item
+                android:id="@+id/optabout"
+                android:title="About" />
+            <!--android:icon="@drawable/ic_menu_share"-->
+
+<!--
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+-->
+        </menu>
+    </item>
+
+</menu>
