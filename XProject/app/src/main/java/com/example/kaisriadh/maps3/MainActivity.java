@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.*;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.location.*;
 import android.os.*;
@@ -16,8 +18,14 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.kaisriadh.maps3.SQLite.DataBaseOpenHelper;
+import com.example.kaisriadh.maps3.SQLite.DatabaseContract;
 import com.example.kaisriadh.maps3.ServerConnection.MySingleton;
 import com.example.kaisriadh.maps3.ServerConnection.Server_Host_Constant;
+import com.example.kaisriadh.maps3.UserPack.AccountInfos;
+import com.example.kaisriadh.maps3.UserPack.Account_Settings;
+import com.example.kaisriadh.maps3.UserPack.AfterLogin;
+import com.example.kaisriadh.maps3.UserPack.Login;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +41,7 @@ public class MainActivity extends Activity {
     //private TextView GpsAlert;
     //private ProgressDialog progressDialog;
     private boolean res;
+    private DataBaseOpenHelper dbhlp;
     @Override
     protected void onRestoreInstanceState(Bundle savedlnstanceState){
         super.onRestoreInstanceState(savedlnstanceState);
@@ -86,6 +95,8 @@ public class MainActivity extends Activity {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         //txtProgress = (TextView) findViewById(R.id.txtProgress);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        dbhlp =new DataBaseOpenHelper(getBaseContext());
+
         //GpsAlert=(TextView)findViewById(R.id.GpsAlert);
         //GPSTester();
 /*        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
@@ -113,7 +124,6 @@ public class MainActivity extends Activity {
             public void run() {
 
                 StartUpTester();
-
                 //Toast.makeText(getBaseContext(), "GPS is Enabled in your devide", Toast.LENGTH_SHORT).show();
                /*SeverHandshake();
                 if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
@@ -180,7 +190,7 @@ private void AnimateProgressBar(){
                 dialog.dismiss();
                 AnimateProgressBar();
                 SeverHandshake();
-                //finish();
+                //finishAffinity();
             }
         });
 
@@ -190,7 +200,7 @@ private void AnimateProgressBar(){
             public void onClick(DialogInterface dialog, int which) {
 
                 dialog.dismiss();
-                finish();
+                finishAffinity();
 
             }
         });
@@ -214,7 +224,7 @@ private void AnimateProgressBar(){
                 Intent callGPSSettingIntent = new Intent(
                         android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(callGPSSettingIntent);
-                //finish();
+                //finishAffinity();
             }
         });
 
@@ -224,7 +234,7 @@ private void AnimateProgressBar(){
             public void onClick(DialogInterface dialog, int which) {
 
                 dialog.dismiss();
-                finish();
+                finishAffinity();
 
             }
         });
@@ -236,27 +246,28 @@ private void AnimateProgressBar(){
        //res=false;
 /*        progressDialog = ProgressDialog.show(MainActivity.this, "",
                 "Contatcting server, Please wait...", true);*/
-        String url= Server_Host_Constant.Host+"/handshake.php";
+        String url= Server_Host_Constant.Host+"/Handshake.php";
         StringRequest req = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(!response.equals("Yes i'm here")){
 //                    res=true;
 //                    progressDialog.dismiss();
-
+                    Toast.makeText(getBaseContext(), response, Toast.LENGTH_SHORT).show();
                         ServerhandshakeDiag();
 
 
                 }else
-                    nextac();
+                    recoverSession();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 //                progressDialog.dismiss();
+                //Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_SHORT).show();
                 ServerhandshakeDiag();
-                //Toast.makeText(getBaseContext(),"Error while establishing connection with server",Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(),"Error while establishing connection with server",Toast.LENGTH_LONG).show();
             }
         }){
             @Override
@@ -274,6 +285,8 @@ private void AnimateProgressBar(){
 
     private void nextac(){
         Intent intent=new Intent(this,GetStartedActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
         startActivity(intent);
     }
 
@@ -292,4 +305,80 @@ private void AnimateProgressBar(){
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
                         View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN); }
+
+
+    private String getLogin(){
+        String cmail="", cpass="";
+        SQLiteDatabase database = dbhlp.getReadableDatabase();
+        Cursor cursor= database.query(DatabaseContract.Login.tablename, null,null,
+                new String[]{},null,null,null);
+
+        if (cursor.moveToFirst()){
+            //do{
+            cmail = cursor.getString(cursor.getColumnIndex(DatabaseContract.Login.colmail));
+            cpass=cursor.getString(cursor.getColumnIndex(DatabaseContract.Login.colpass));
+            // do what ever you want here
+            //}while(cursor.moveToNext());
+        }
+        cursor.close();
+        return  cmail+"  "+cpass;
+    }
+
+//    Intent intent = new Intent(getBaseContext(),Account_Settings.class);
+//    startActivity(intent);
+    private void recoverSession(){
+        String str=getLogin();
+        if(str.length()>2){
+            final String mail = str.substring(0,str.indexOf("  "));
+            final String psw =str.substring(str.indexOf("  ")+2);
+
+
+
+                    String url= Server_Host_Constant.Host+"/login.php";
+                    StringRequest req = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                            if(response.contains("Welcome")){
+                                AccountInfos.setUserid(response.substring(0,response.indexOf("  ")));
+                                AccountInfos.setFullUsername(response.substring(response.indexOf("Welcome")+8));
+                                Toast.makeText(getBaseContext(),"Welcome back "+AccountInfos.getFullUsername()+" !", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(getBaseContext(),AfterLogin.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.putExtra("EXIT", true);
+                                startActivity(intent);
+                            }else{
+
+                                Toast.makeText(getBaseContext(),response, Toast.LENGTH_LONG).show();
+                                nextac();
+                            }
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getBaseContext(),"Error while establishing connection with server", Toast.LENGTH_LONG).show();
+                        }
+                    }){
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String,String> params=new HashMap<>();
+                            params.put("login_mail",mail);//POST["login_mail"]=mail;
+                            params.put("login_pass",psw);
+                            return params;
+                        }
+                    };
+
+                    MySingleton.getInstance(getApplicationContext()).addToRequestQueue(req);
+
+
+
+
+        }else
+            nextac();
+
+    }
+
+
+
 }

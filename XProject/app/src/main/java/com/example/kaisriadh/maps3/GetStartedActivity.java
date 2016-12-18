@@ -20,6 +20,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.kaisriadh.maps3.UserPack.HomeActivity;
+
+
 public class GetStartedActivity extends AppCompatActivity {
 
     /**
@@ -63,7 +66,7 @@ public class GetStartedActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main2, menu);
+        //getMenuInflater().inflate(R.menu.menu_main2, menu);
         return true;
     }
 
@@ -94,8 +97,8 @@ public class GetStartedActivity extends AppCompatActivity {
         private static final String ARG_SECTION_STRING = "section";
         private static final String ARG_SECTION_VISBILITY = "section_visibility";
 
-        public PlaceholderFragment() {
-        }
+//        public PlaceholderFragment() {
+//        }
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -122,6 +125,8 @@ public class GetStartedActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent =new Intent(v.getContext(),HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("EXIT", true);
                     startActivity(intent);
                 }
             });

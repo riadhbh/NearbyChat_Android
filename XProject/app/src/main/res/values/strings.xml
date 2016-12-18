@@ -26,6 +26,7 @@
 
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
     <string name="title_get_started_act">GetStartedActivity</string>
     <string name="section_format">STEP %1$d</string>
     <string name="section_format_string">%1$s</string>
@@ -34,4 +35,10 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+<!--    <string-array name="Gender_sp">
+        <item name="GM">Male</item>
+        <item name="GF">Female</item>
+    </string-array>-->
+
 </resources>

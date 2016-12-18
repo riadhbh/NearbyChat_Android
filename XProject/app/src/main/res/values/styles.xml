@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,5 +18,25 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+<!--    <style name="MyDatePicker" parent="@android:style/Widget.DeviceDefault.DatePicker">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:dateTextAppearance">@android:color/white</item>
+        <item name="android:divider">#FFFFFF</item>
+        <item name="android:windowIsFloating">true</item>
+
+    </style>
+
+
+    <style name="MyDatePickerDialogTheme" parent="Theme.Design">
+        &lt;!&ndash; this is new &ndash;&gt;
+        <item name="colorAccent">@color/wallet_highlighted_text_holo_light</item>
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorPrimaryDark">#FFFFFF</item>
+        <item name="android:datePickerStyle">@style/MyDatePicker</item>
+    </style>-->
 
 </resources>

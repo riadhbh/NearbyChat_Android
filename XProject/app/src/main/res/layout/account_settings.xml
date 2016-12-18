@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/panels_back">
+    android:background="#2d3238">
 
     <TextView
         android:layout_width="wrap_content"
@@ -10,6 +10,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Account settings"
         android:id="@+id/textView52"
+        android:textColor="#FFFFFF"
+        android:background="#3c4147"
+        android:padding="10dp"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp" />
 
@@ -28,7 +31,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/stfullname" />
+                android:id="@+id/stfullname"
+                android:textColor="#FFFFFF"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,95 +42,122 @@
                 android:text="Personal informations"
                 android:id="@+id/stpinfostxt"
                 android:layout_marginTop="20dp"
-                android:clickable="true" />
+                android:clickable="true"
+                android:textColor="#FFFFFF"
+                />
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/aspinfosl"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_gravity="center">
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp">
 
                     <TextView
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="E-mail"
-                        android:id="@+id/textView48" />
+                        android:id="@+id/textView48"
+                        android:textColor="#FFFFFF"
+                        />
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:ems="10"
-                        android:id="@+id/stmail" />
+                        android:id="@+id/stmail"
+                        android:textColor="#FFFFFF"
+                        android:background="#3c4147"
+                        android:padding="10dp"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp">
 
                     <TextView
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Confirm E-mail"
-                        android:id="@+id/textView45" />
+                        android:id="@+id/textView45"
+                        android:textColor="#FFFFFF"
+                        />
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:ems="10"
-                        android:id="@+id/stconfmail" />
-                </LinearLayout>
+                        android:id="@+id/stconfmail"
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="First name"
-                        android:id="@+id/textView46" />
-
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/stfn" />
+                        android:textColor="#FFFFFF"
+                        android:background="#3c4147"
+                        android:padding="10dp"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" >
+                    android:layout_marginBottom="10dp">
 
                     <TextView
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Last name"
-                        android:id="@+id/textView47" />
+                        android:text="First name"
+                        android:id="@+id/textView46"
+                        android:textColor="#FFFFFF"
+                        />
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:ems="10"
-                        android:id="@+id/stln" />
+                        android:id="@+id/stfn"
+                        android:textColor="#FFFFFF"
+                        android:background="#3c4147"
+                        android:padding="10dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Last name"
+                        android:id="@+id/textView47"
+                        android:textColor="#FFFFFF"
+                        />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/stln"
+                        android:textColor="#FFFFFF"
+                        android:background="#3c4147"
+                        android:padding="10dp"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -137,7 +169,9 @@
                 android:text="Account password"
                 android:id="@+id/stpasstxt"
                 android:layout_marginTop="25dp"
-                android:clickable="true" />
+                android:clickable="true"
+                android:textColor="#FFFFFF"
+                />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -150,77 +184,103 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp">
 
                     <TextView
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Old password"
-                        android:id="@+id/textView49" />
+                        android:id="@+id/textView49"
+                        android:textColor="#FFFFFF"
+                        />
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:ems="10"
-                        android:id="@+id/stoldpass" />
+                        android:id="@+id/stoldpass"
+
+                        android:textColor="#FFFFFF"
+                        android:background="#3c4147"
+                        android:padding="10dp"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp">
 
                     <TextView
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Password"
-                        android:id="@+id/textView50" />
+                        android:id="@+id/textView50"
+                        android:textColor="#FFFFFF"
+                        />
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:ems="10"
-                        android:id="@+id/stnewpass" />
+                        android:id="@+id/stnewpass"
+                        android:textColor="#FFFFFF"
+                        android:background="#3c4147"
+                        android:padding="10dp"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp">
 
                     <TextView
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Confirm password"
-                        android:id="@+id/textView51" />
+                        android:id="@+id/textView51"
+                        android:textColor="#FFFFFF"
+                        />
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:ems="10"
-                        android:id="@+id/stcnfpass" />
+                        android:id="@+id/stcnfpass"
+                        android:textColor="#FFFFFF"
+                        android:background="#3c4147"
+                        android:padding="10dp"
+                        />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="save"
                     android:id="@+id/savebtn"
-                    android:visibility="gone"
-                    android:layout_gravity="center" />
+                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:background="#ea4c89"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
             </LinearLayout>
 
         </LinearLayout>

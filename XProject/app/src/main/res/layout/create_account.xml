@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="#2d3238">
-
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/applogo"
+        android:id="@+id/imageView2"
+        android:foregroundGravity="center"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -132,7 +142,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="30dp">
+                    android:layout_marginBottom="10dp">
 
                     <EditText
                         android:layout_width="match_parent"
@@ -150,6 +160,57 @@
                 </LinearLayout>
 
 
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp">
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/gendersp"
+                        android:textColor="#FFFFFF"
+                        android:background="#3c4147"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="30dp"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+<!--                    <DatePicker
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:endYear="2100"
+                        android:startYear="1900"
+                        android:calendarViewShown="false"
+                        android:layout_gravity="center"
+                        android:id="@+id/birthday"
+                        style="@style/MyDatePicker"
+                        android:theme="@style/MyDatePickerDialogTheme"
+                        android:yearListSelectorColor="#FFFFFF"
+                        android:headerDayOfMonthTextAppearance="@android:color/white"
+                        android:headerMonthTextAppearance="@android:color/white"
+                        android:headerYearTextAppearance="@android:color/white"
+                        android:importantForAccessibility="auto">
+                    </DatePicker>-->
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Your birth day !"
+                        android:textColorHint="#5e6369"
+                        android:textColor="#FFFFFF"
+                        android:background="#3c4147"
+                        android:padding="10dp"
+                        android:ems="10"
+                        android:id="@+id/ca_bday"
+                        android:layout_weight="1"
+                        android:clickable="false" />
+                </LinearLayout>
 
                 <Button
                     android:layout_width="match_parent"

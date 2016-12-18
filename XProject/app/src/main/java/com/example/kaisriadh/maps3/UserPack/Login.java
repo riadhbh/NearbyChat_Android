@@ -2,10 +2,14 @@ package com.example.kaisriadh.maps3.UserPack;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,23 +22,26 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.kaisriadh.maps3.R;
+import com.example.kaisriadh.maps3.SQLite.DataBaseOpenHelper;
+import com.example.kaisriadh.maps3.SQLite.DatabaseContract;
 import com.example.kaisriadh.maps3.ServerConnection.MySingleton;
 import com.example.kaisriadh.maps3.ServerConnection.Server_Host_Constant;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Login extends Activity implements Runnable {
-TextView createacco,forgotpass;
-EditText email,pass;
-Button loginbtn;
-ProgressDialog progressDialog;
+public class Login extends Activity {
+private TextView createacco,forgotpass;
+private EditText email,pass;
+private Button loginbtn;
+private ProgressDialog progressDialog;
+private DataBaseOpenHelper dbhlp;
 
-  private void login_fn(){
-    final String mail,psw;
+  private void login_fn(final String mail, final String psw){
+    //final String mail,psw;
     String msg="";
-    mail=email.getText().toString().toLowerCase();
-    psw=pass.getText().toString();
+    //mail=email.getText().toString().toLowerCase();
+    //psw=pass.getText().toString();
 
 
 
@@ -49,8 +56,14 @@ ProgressDialog progressDialog;
             public void onResponse(String response) {
                 progressDialog.dismiss();
                 if(response.contains("Welcome")){
-                    Toast.makeText(getBaseContext(),response, Toast.LENGTH_LONG).show();
-
+                    backupLogin(mail,psw);
+                    AccountInfos.setUserid(response.substring(0,response.indexOf("  ")));
+                    AccountInfos.setFullUsername(response.substring(response.indexOf("Welcome")+8));
+                    Toast.makeText(getBaseContext(),"Welcome "+AccountInfos.getFullUsername(), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getBaseContext(),AfterLogin.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("EXIT", true);
+                    startActivity(intent);
                 }else{
 
                  Toast.makeText(getBaseContext(),response, Toast.LENGTH_LONG).show();
@@ -89,13 +102,15 @@ ProgressDialog progressDialog;
     }
 }
 
-@Override
+/*@Override
 public void run() {
     login_fn();
-}
+}*/
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
     try{
         final Handler start = new Handler();
 
@@ -108,10 +123,11 @@ createacco = (TextView) findViewById(R.id.create);
 forgotpass = (TextView) findViewById(R.id.forgot);
 email=(EditText)findViewById(R.id.lmail);
 pass=(EditText)findViewById(R.id.lpass);
+                dbhlp =new DataBaseOpenHelper(getBaseContext());
     loginbtn.setOnClickListener(new View.OnClickListener() {
       @Override
         public void onClick(View v) {
-            login_fn();
+            login_fn(email.getText().toString().toLowerCase(),pass.getText().toString());
 
 
         }
@@ -140,5 +156,14 @@ e.printStackTrace();
 }
 
 }
+private void backupLogin(String mail,String pass){
+SQLiteDatabase database=dbhlp.getWritableDatabase();
+    database.delete(DatabaseContract.Login.tablename,null,null);//delete all rows
+    ContentValues values = new ContentValues();
+    values.put(DatabaseContract.Login.colmail,mail);
+    values.put(DatabaseContract.Login.colpass,pass);
+    database.insert(DatabaseContract.Login.tablename,null,values);
+}
+
 
 }

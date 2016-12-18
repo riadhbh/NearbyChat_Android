@@ -4,14 +4,29 @@ package com.example.kaisriadh.maps3.ServerConnection;
  * Created by riadh on 8/19/2016.
  */
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.kaisriadh.maps3.R;
+import com.example.kaisriadh.maps3.UserPack.AccountInfos;
+import com.example.kaisriadh.maps3.UserPack.Account_Settings;
+import com.example.kaisriadh.maps3.UserPack.Login;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MySingleton {
     private static MySingleton mInstance;
@@ -173,38 +188,7 @@ public class MySingleton {
         return msg;
     }
 
-    public static String checkHotelname(String hname){
-        String msg="";
-        if (hname.equals("")) {
-            msg += "*You must fill the hotel name field\n";
-        } else {
-            if (hname.length() < 2)
-                msg += "*The hotel name field is too short\n";
-            if (fullofspaces(hname))
-                msg += "*The hotel name field contains too many spaces\n";
-        }
-        return msg;
-    }
 
-    public static String checkHotelwebsite(String hwebsite){
-        String msg="";
-        if (hwebsite.equals(""))
-            msg += "*You must fill the website field\n";
-        else{
-            if(hwebsite.indexOf(".")<2||
-               hwebsite.indexOf(".")==hwebsite.lastIndexOf(".")||
-               (hwebsite.lastIndexOf(".")-hwebsite.indexOf("."))<3
-                    )
-                msg+="*Invalid website address !\n";
-        }
-        return msg;
-    }
 
-    public static String checkPhonenumber(String phnum){
-        String msg;
-        msg="";
-          if(phnum.length()<8)
-              msg+="*Invalid phone number\n";
-        return msg;
-    }
+
 }
